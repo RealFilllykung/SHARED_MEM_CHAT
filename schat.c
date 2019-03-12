@@ -31,8 +31,7 @@ int main(int argc, char *argv[]){
     //if it is parent
     if(child){
         //We use parent as the writer
-        if (user == 1)
-        {
+        if (user == 1){
             //Get the ID of the specific key for parent
             shmID = shmget((key_t)1234,MEM_SIZE, 0666 | IPC_CREAT);
             
@@ -55,10 +54,8 @@ int main(int argc, char *argv[]){
             sh_area = (struct shm_st*)sh_mem;
             
             //While the process suppose to run
-            while(running)
-            {
-                while(sh_area -> written_0)
-                {
+            while(running){
+                while(sh_area -> written_0){
                     sleep(1);
                 }
                 fgets(buffer,BUFSIZ,stdin);
@@ -100,10 +97,8 @@ int main(int argc, char *argv[]){
             sh_area = (struct shm_st*)sh_mem;
             
             //While the process suppose to run
-            while(running)
-            {
-                while(sh_area -> written_1)
-                {
+            while(running){
+                while(sh_area -> written_1){
                     sleep(1);
                 }
                 fgets(buffer,BUFSIZ,stdin);
@@ -150,10 +145,9 @@ int main(int argc, char *argv[]){
             sh_area = (struct shm_st*)sh_mem;
             sh_area -> written_1 = 0;
             
-            while(running)
-            {
-                if(sh_area -> written_1)
-                {
+            //While the child suppose to running
+            while(running){
+                if(sh_area -> written_1){
                     printf("%s",sh_area -> data_1);
                     sh_area -> written_1 = 0;
                     if(strncmp(sh_area -> data_1,"end chat",8) == 0)
@@ -164,8 +158,8 @@ int main(int argc, char *argv[]){
                 }
             }
             
-            if(shmdt(sh_mem) == -1 || shmctl(shmID,IPC_RMID,0) == -1)
-            {
+            //If we cannot detach the shared memory or destroy the memory
+            if(shmdt(sh_mem) == -1 || shmctl(shmID,IPC_RMID,0) == -1){
                 fprintf(stderr,"shmdt or shmctl failed\n");
                 exit(EXIT_FAILURE);
             }
@@ -195,22 +189,20 @@ int main(int argc, char *argv[]){
             sh_area = (struct shm_st*)sh_mem;
             sh_area -> written_0 = 0;
             
-            while(running)
-            {
-                if(sh_area -> written_0)
-                {
+            //While the child suppose to running
+            while(running){
+                if(sh_area -> written_0){
                     printf("%s",sh_area -> data_0);
                     sh_area -> written_0 = 0;
-                    if(strncmp(sh_area -> data_0,"end chat",8) == 0)
-                    {
+                    if(strncmp(sh_area -> data_0,"end chat",8) == 0){
                         kill(getppid(),SIGINT);
                         running = 0;
                     }
                 }
             }
             
-            if(shmdt(sh_mem) == -1 || shmctl(shmID,IPC_RMID,0) == -1)
-            {
+            //If we cannot detach the shared memory or destroy the memory
+            if(shmdt(sh_mem) == -1 || shmctl(shmID,IPC_RMID,0) == -1){
                 fprintf(stderr,"shmdt or shmctl failed\n");
                 exit(EXIT_FAILURE);
             }
