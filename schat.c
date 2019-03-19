@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //Create the share memory
+            //Attach the shared memory
             sh_mem = shmat(shmID,NULL,0);
             
             //if it failed to create the share memory
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //attach the sh_area to shared memory
+            //Create the shared area
             sh_area = (struct shm_st*)sh_mem;
             
             //While the process suppose to run
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //Create the share memory
+            //Attach the shared memory
             sh_mem = shmat(shmID,NULL,0);
             
             //if it failed to create the share memory
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //attach the sh_area to shared memory
+            //Create the shared area
             sh_area = (struct shm_st*)sh_mem;
             
             //While the process suppose to run
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //Create the share memory
+            //Attach the shared memory
             sh_mem = shmat(shmID,NULL,0);
             
             //if it failed to create the share memory
@@ -141,7 +141,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //attach the sh_area to shared memory
+            //Create the shared area
             sh_area = (struct shm_st*)sh_mem;
             sh_area -> written_1 = 0;
             
@@ -176,7 +176,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //Create the share memory
+            //Attach the shared memory
             sh_mem = shmat(shmID,NULL,0);
             
             //if it failed to create the share memory
@@ -185,7 +185,7 @@ int main(int argc, char *argv[]){
                 exit(EXIT_FAILURE);
             }
             
-            //attach the sh_area to shared memory
+            //Create the shared area
             sh_area = (struct shm_st*)sh_mem;
             sh_area -> written_0 = 0;
             
